@@ -1,0 +1,26 @@
+{
+    "Avocado Pasta": {
+        "dairy": "0",
+        "fruits & vegetables": "1",
+        "grains": "4",
+        "protein": "1"
+    },
+    "Lentil Stew": {
+        "dairy": "0",
+        "fruits & vegetables": "3",
+        "grains": "0",
+        "protein": "2"
+    },
+    "Oatmeal": {
+        "dairy": "2",
+        "fruits & vegetables": "2",
+        "grains": "3",
+        "protein": "1"
+    },
+    "Tikka Kebabs": {
+        "dairy": "1",
+        "fruits & vegetables": "3",
+        "grains": "0",
+        "protein": "2"
+    }
+}

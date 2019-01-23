@@ -17,6 +17,7 @@ namespace WindowsFormsApp1
         private string veg;
         private string dairy;
         private string protein;
+        private string[] ingredients;
         public bool isValid;
 
         public string RecipeName
@@ -44,6 +45,11 @@ namespace WindowsFormsApp1
             get { return protein; }
             set { protein = value; }
         }
+        public string[] Ingredients
+        {
+            get { return ingredients; }
+            set { ingredients = value; }
+        }
 
 
         public string[] getValues()
@@ -66,6 +72,7 @@ namespace WindowsFormsApp1
                 Veg = vegBox.Text;
                 Dairy = dairyBox.Text;
                 Protein = proteinBox.Text;
+                Ingredients = ingredientsBox.Text.Split();
                 isValid = true;
                 MessageBox.Show(nameBox.Text + " Recipe Added!");
             }
@@ -75,11 +82,6 @@ namespace WindowsFormsApp1
                 MessageBox.Show("Some fields have been left empty! Fill in all blanks (0 if not applicable)");
             }
             
-        }
-
-        private void verifyFields()
-        {
-
         }
     }
 }

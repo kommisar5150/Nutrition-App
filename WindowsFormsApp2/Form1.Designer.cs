@@ -45,8 +45,8 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
+            this.addNewRecipe = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -67,6 +67,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+            this.sheetsButton = new System.Windows.Forms.Button();
+            this.addGroceryToList = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel3.SuspendLayout();
@@ -119,7 +121,7 @@
             this.grainText.AutoSize = true;
             this.grainText.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grainText.ForeColor = System.Drawing.Color.White;
-            this.grainText.Location = new System.Drawing.Point(272, 233);
+            this.grainText.Location = new System.Drawing.Point(355, 238);
             this.grainText.Name = "grainText";
             this.grainText.Size = new System.Drawing.Size(72, 24);
             this.grainText.TabIndex = 4;
@@ -130,7 +132,7 @@
             this.vegText.AutoSize = true;
             this.vegText.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.vegText.ForeColor = System.Drawing.Color.White;
-            this.vegText.Location = new System.Drawing.Point(272, 272);
+            this.vegText.Location = new System.Drawing.Point(355, 277);
             this.vegText.Name = "vegText";
             this.vegText.Size = new System.Drawing.Size(129, 24);
             this.vegText.TabIndex = 5;
@@ -141,7 +143,7 @@
             this.dairyText.AutoSize = true;
             this.dairyText.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dairyText.ForeColor = System.Drawing.Color.White;
-            this.dairyText.Location = new System.Drawing.Point(272, 312);
+            this.dairyText.Location = new System.Drawing.Point(355, 317);
             this.dairyText.Name = "dairyText";
             this.dairyText.Size = new System.Drawing.Size(60, 24);
             this.dairyText.TabIndex = 6;
@@ -152,7 +154,7 @@
             this.proteinText.AutoSize = true;
             this.proteinText.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.proteinText.ForeColor = System.Drawing.Color.White;
-            this.proteinText.Location = new System.Drawing.Point(272, 353);
+            this.proteinText.Location = new System.Drawing.Point(355, 358);
             this.proteinText.Name = "proteinText";
             this.proteinText.Size = new System.Drawing.Size(79, 24);
             this.proteinText.TabIndex = 7;
@@ -163,7 +165,7 @@
             this.gtotal.AutoSize = true;
             this.gtotal.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gtotal.ForeColor = System.Drawing.Color.Red;
-            this.gtotal.Location = new System.Drawing.Point(479, 233);
+            this.gtotal.Location = new System.Drawing.Point(562, 238);
             this.gtotal.Name = "gtotal";
             this.gtotal.Size = new System.Drawing.Size(22, 24);
             this.gtotal.TabIndex = 8;
@@ -174,7 +176,7 @@
             this.vtotal.AutoSize = true;
             this.vtotal.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.vtotal.ForeColor = System.Drawing.Color.Red;
-            this.vtotal.Location = new System.Drawing.Point(479, 272);
+            this.vtotal.Location = new System.Drawing.Point(562, 277);
             this.vtotal.Name = "vtotal";
             this.vtotal.Size = new System.Drawing.Size(22, 24);
             this.vtotal.TabIndex = 9;
@@ -185,7 +187,7 @@
             this.dtotal.AutoSize = true;
             this.dtotal.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtotal.ForeColor = System.Drawing.Color.Red;
-            this.dtotal.Location = new System.Drawing.Point(479, 312);
+            this.dtotal.Location = new System.Drawing.Point(562, 317);
             this.dtotal.Name = "dtotal";
             this.dtotal.Size = new System.Drawing.Size(22, 24);
             this.dtotal.TabIndex = 10;
@@ -196,7 +198,7 @@
             this.ptotal.AutoSize = true;
             this.ptotal.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ptotal.ForeColor = System.Drawing.Color.Red;
-            this.ptotal.Location = new System.Drawing.Point(479, 353);
+            this.ptotal.Location = new System.Drawing.Point(562, 358);
             this.ptotal.Name = "ptotal";
             this.ptotal.Size = new System.Drawing.Size(22, 24);
             this.ptotal.TabIndex = 11;
@@ -222,7 +224,7 @@
             this.panel1.Controls.Add(this.button5);
             this.panel1.Controls.Add(this.button11);
             this.panel1.Controls.Add(this.button10);
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.addNewRecipe);
             this.panel1.Controls.Add(this.addRecipe);
             this.panel1.Controls.Add(this.removeRecipe);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
@@ -276,6 +278,21 @@
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
+            // addNewRecipe
+            // 
+            this.addNewRecipe.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.addNewRecipe.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.addNewRecipe.ForeColor = System.Drawing.Color.White;
+            this.addNewRecipe.Image = ((System.Drawing.Image)(resources.GetObject("addNewRecipe.Image")));
+            this.addNewRecipe.Location = new System.Drawing.Point(3, 195);
+            this.addNewRecipe.Name = "addNewRecipe";
+            this.addNewRecipe.Size = new System.Drawing.Size(200, 93);
+            this.addNewRecipe.TabIndex = 13;
+            this.addNewRecipe.Text = "New Recipe";
+            this.addNewRecipe.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+            this.addNewRecipe.UseVisualStyleBackColor = true;
+            this.addNewRecipe.Click += new System.EventHandler(this.button1_Click);
+            // 
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -287,27 +304,12 @@
             this.pictureBox1.TabIndex = 14;
             this.pictureBox1.TabStop = false;
             // 
-            // button1
-            // 
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(3, 195);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(200, 93);
-            this.button1.TabIndex = 13;
-            this.button1.Text = "New Recipe";
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(631, 353);
+            this.label1.Location = new System.Drawing.Point(714, 358);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(22, 24);
             this.label1.TabIndex = 19;
@@ -318,7 +320,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(631, 312);
+            this.label2.Location = new System.Drawing.Point(714, 317);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(22, 24);
             this.label2.TabIndex = 18;
@@ -329,7 +331,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(631, 272);
+            this.label3.Location = new System.Drawing.Point(714, 277);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(22, 24);
             this.label3.TabIndex = 17;
@@ -340,7 +342,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(631, 233);
+            this.label4.Location = new System.Drawing.Point(714, 238);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(22, 24);
             this.label4.TabIndex = 16;
@@ -351,7 +353,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(316, 171);
+            this.label5.Location = new System.Drawing.Point(399, 176);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(152, 24);
             this.label5.TabIndex = 20;
@@ -362,7 +364,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(554, 171);
+            this.label6.Location = new System.Drawing.Point(637, 176);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(176, 24);
             this.label6.TabIndex = 21;
@@ -383,7 +385,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(873, 137);
+            this.panel3.Size = new System.Drawing.Size(987, 137);
             this.panel3.TabIndex = 22;
             // 
             // label7
@@ -392,7 +394,7 @@
             this.label7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
             this.label7.Font = new System.Drawing.Font("Century Gothic", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(256, 18);
+            this.label7.Location = new System.Drawing.Point(321, 8);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(532, 39);
             this.label7.TabIndex = 23;
@@ -404,7 +406,7 @@
             this.sundayButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.sundayButton.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sundayButton.ForeColor = System.Drawing.Color.White;
-            this.sundayButton.Location = new System.Drawing.Point(734, 101);
+            this.sundayButton.Location = new System.Drawing.Point(799, 91);
             this.sundayButton.Name = "sundayButton";
             this.sundayButton.Size = new System.Drawing.Size(75, 23);
             this.sundayButton.TabIndex = 32;
@@ -418,7 +420,7 @@
             this.mondayButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.mondayButton.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mondayButton.ForeColor = System.Drawing.Color.White;
-            this.mondayButton.Location = new System.Drawing.Point(242, 101);
+            this.mondayButton.Location = new System.Drawing.Point(307, 91);
             this.mondayButton.Name = "mondayButton";
             this.mondayButton.Size = new System.Drawing.Size(75, 23);
             this.mondayButton.TabIndex = 26;
@@ -432,7 +434,7 @@
             this.saturdayButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.saturdayButton.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.saturdayButton.ForeColor = System.Drawing.Color.White;
-            this.saturdayButton.Location = new System.Drawing.Point(653, 101);
+            this.saturdayButton.Location = new System.Drawing.Point(718, 91);
             this.saturdayButton.Name = "saturdayButton";
             this.saturdayButton.Size = new System.Drawing.Size(75, 23);
             this.saturdayButton.TabIndex = 31;
@@ -446,7 +448,7 @@
             this.tuesdayButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.tuesdayButton.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tuesdayButton.ForeColor = System.Drawing.Color.White;
-            this.tuesdayButton.Location = new System.Drawing.Point(323, 101);
+            this.tuesdayButton.Location = new System.Drawing.Point(388, 91);
             this.tuesdayButton.Name = "tuesdayButton";
             this.tuesdayButton.Size = new System.Drawing.Size(75, 23);
             this.tuesdayButton.TabIndex = 27;
@@ -460,7 +462,7 @@
             this.fridayButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.fridayButton.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fridayButton.ForeColor = System.Drawing.Color.White;
-            this.fridayButton.Location = new System.Drawing.Point(572, 101);
+            this.fridayButton.Location = new System.Drawing.Point(637, 91);
             this.fridayButton.Name = "fridayButton";
             this.fridayButton.Size = new System.Drawing.Size(75, 23);
             this.fridayButton.TabIndex = 30;
@@ -474,7 +476,7 @@
             this.wednesdayButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.wednesdayButton.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.wednesdayButton.ForeColor = System.Drawing.Color.White;
-            this.wednesdayButton.Location = new System.Drawing.Point(404, 101);
+            this.wednesdayButton.Location = new System.Drawing.Point(469, 91);
             this.wednesdayButton.Name = "wednesdayButton";
             this.wednesdayButton.Size = new System.Drawing.Size(81, 23);
             this.wednesdayButton.TabIndex = 28;
@@ -488,7 +490,7 @@
             this.thursdayButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.thursdayButton.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.thursdayButton.ForeColor = System.Drawing.Color.White;
-            this.thursdayButton.Location = new System.Drawing.Point(491, 101);
+            this.thursdayButton.Location = new System.Drawing.Point(556, 91);
             this.thursdayButton.Name = "thursdayButton";
             this.thursdayButton.Size = new System.Drawing.Size(75, 23);
             this.thursdayButton.TabIndex = 29;
@@ -521,6 +523,8 @@
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.sheetsButton);
+            this.panel2.Controls.Add(this.addGroceryToList);
             this.panel2.Controls.Add(this.recipeList);
             this.panel2.Controls.Add(this.label9);
             this.panel2.Controls.Add(this.label8);
@@ -528,14 +532,14 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(209, 434);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(664, 295);
+            this.panel2.Size = new System.Drawing.Size(778, 295);
             this.panel2.TabIndex = 25;
             // 
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.ForeColor = System.Drawing.Color.Green;
-            this.button3.Location = new System.Drawing.Point(772, 316);
+            this.button3.Location = new System.Drawing.Point(865, 353);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 33;
@@ -547,7 +551,7 @@
             // 
             this.button4.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button4.ForeColor = System.Drawing.Color.Green;
-            this.button4.Location = new System.Drawing.Point(772, 239);
+            this.button4.Location = new System.Drawing.Point(865, 213);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 34;
@@ -555,11 +559,33 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
+            // sheetsButton
+            // 
+            this.sheetsButton.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sheetsButton.Location = new System.Drawing.Point(655, 229);
+            this.sheetsButton.Name = "sheetsButton";
+            this.sheetsButton.Size = new System.Drawing.Size(92, 40);
+            this.sheetsButton.TabIndex = 35;
+            this.sheetsButton.Text = "Send to Spreadsheet";
+            this.sheetsButton.UseVisualStyleBackColor = true;
+            this.sheetsButton.Click += new System.EventHandler(this.sheetsButton_Click);
+            // 
+            // addGroceryToList
+            // 
+            this.addGroceryToList.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addGroceryToList.Location = new System.Drawing.Point(655, 61);
+            this.addGroceryToList.Name = "addGroceryToList";
+            this.addGroceryToList.Size = new System.Drawing.Size(92, 41);
+            this.addGroceryToList.TabIndex = 36;
+            this.addGroceryToList.Text = "Add to Grocery";
+            this.addGroceryToList.UseVisualStyleBackColor = true;
+            this.addGroceryToList.Click += new System.EventHandler(this.addGroceryToList_Click);
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
-            this.ClientSize = new System.Drawing.Size(873, 729);
+            this.ClientSize = new System.Drawing.Size(987, 729);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.panel2);
@@ -618,7 +644,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button addNewRecipe;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label9;
@@ -636,6 +662,8 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button sheetsButton;
+        private System.Windows.Forms.Button addGroceryToList;
     }
 }
 

@@ -14,6 +14,7 @@ namespace WindowsFormsApp2
     {
         public Recipe recipe;
         private string[] confirmedIngredients;
+        public bool isValid;
 
         public string[] ConfirmedIngredients
         {
@@ -34,6 +35,7 @@ namespace WindowsFormsApp2
 
         private void confirmButton_Click(object sender, EventArgs e)
         {
+            isValid = true;
             var y = ingredientList.CheckedItems;
             var x = y.GetEnumerator();
             var list = new List<string>();
@@ -41,6 +43,11 @@ namespace WindowsFormsApp2
                 list.Add(x.Current.ToString());
             var array = list.ToArray();
             ConfirmedIngredients = array;
+
+            if(confirmedIngredients.Length == 0)
+            {
+                isValid = false;
+            }
         }
     }
 }

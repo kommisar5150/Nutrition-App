@@ -23,11 +23,13 @@ using WindowsFormsApp2;
  * - If you have a bunch of time at some point, separate all utility functions to separate class
  * - Clean up code and comment
  * - Error handling when reading input files in case people add stuff that doesn't exist, or invalid formats.
+ * - Exceptions for when items aren't selected for push to sheets/add to groceries
+ * - Enable adding ingredients to recipe with comma as delimiter instead of spaces
  */
 
-namespace WindowsFormsApp1
+namespace GroceryApp
 {
-    public partial class Form1 : Form
+    public partial class mainWindow : Form
     {
         Dictionary<string, Dictionary<string, string>> recipes;
         SheetsService service;
@@ -64,11 +66,11 @@ namespace WindowsFormsApp1
             new ArrayList(),
         };
 
-        public Form1()
+        public mainWindow()
         {
             InitializeComponent();
-            Application.ApplicationExit += new EventHandler(this.OnApplicationExit);
-            recipeList.DoubleClick += new EventHandler(recipeList_DoubleClick);
+            Application.ApplicationExit += new EventHandler(this.exitApplication);
+            recipeList.DoubleClick += new EventHandler(showRecipeIngredients);
             string json = File.ReadAllText("data.json");
             string ingredientsjson = File.ReadAllText("Recipe_Data.json");
             recipes = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(json);
@@ -77,12 +79,10 @@ namespace WindowsFormsApp1
             foreach (KeyValuePair<string, Dictionary<string, string>> item in recipes)
             {
                 recipeList.Items.Add(item.Key);
-            }
-
-            
+            }          
         }
 
-        private void addRecipe_Click(object sender, EventArgs e)
+        private void addRecipeToDailyList(object sender, EventArgs e)
         {
             if(selectedDay > -1 && recipeList.SelectedItem != null)
             {
@@ -103,11 +103,11 @@ namespace WindowsFormsApp1
                 weeklyValues[selectedDay, 1] = Int32.Parse(vtotal.Text);
                 weeklyValues[selectedDay, 2] = Int32.Parse(dtotal.Text);
                 weeklyValues[selectedDay, 3] = Int32.Parse(ptotal.Text);
-                checkQuantities();
+                checkDailyNutritionQuantities();
             }  
         }
 
-        private void removeRecipe_Click(object sender, EventArgs e)
+        private void removeRecipeFromDailyList(object sender, EventArgs e)
         {
             if(selectedDay > -1 && nutrientList.SelectedItem != null)
             {
@@ -129,11 +129,11 @@ namespace WindowsFormsApp1
 
                 nutrientList.Items.Remove(selection);
                 dailyRecipes[selectedDay].Remove(selection);
-                checkQuantities();
+                checkDailyNutritionQuantities();
             }
         }
 
-        private void OnApplicationExit(object sender, EventArgs e)
+        private void exitApplication(object sender, EventArgs e)
         {
             using (StreamWriter file = File.CreateText(@"data.json"))
             {
@@ -150,7 +150,7 @@ namespace WindowsFormsApp1
             Application.Exit();
         }
 
-        private void checkQuantities()
+        private void checkDailyNutritionQuantities()
         {
             if (Int32.Parse(ptotal.Text) >= 3)
             {
@@ -186,8 +186,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        //ADD NEW RECIPE
-        private void button1_Click(object sender, EventArgs e)
+        private void addNewRecipeToMasterList(object sender, EventArgs e)
         {
             addRecipeForm newRecipeWindow = new addRecipeForm();
 
@@ -229,7 +228,7 @@ namespace WindowsFormsApp1
             dtotal.Text = (weeklyValues[selectedDay, 2]).ToString();
             ptotal.Text = (weeklyValues[selectedDay, 3]).ToString();
 
-            checkQuantities();
+            checkDailyNutritionQuantities();
         }
 
         private void tuesdayButton_Click(object sender, EventArgs e)
@@ -249,7 +248,7 @@ namespace WindowsFormsApp1
             dtotal.Text = (weeklyValues[selectedDay, 2]).ToString();
             ptotal.Text = (weeklyValues[selectedDay, 3]).ToString();
 
-            checkQuantities();
+            checkDailyNutritionQuantities();
         }
 
         private void wednesdayButton_Click(object sender, EventArgs e)
@@ -269,7 +268,7 @@ namespace WindowsFormsApp1
             dtotal.Text = (weeklyValues[selectedDay, 2]).ToString();
             ptotal.Text = (weeklyValues[selectedDay, 3]).ToString();
 
-            checkQuantities();
+            checkDailyNutritionQuantities();
         }
 
         private void thursdayButton_Click(object sender, EventArgs e)
@@ -289,7 +288,7 @@ namespace WindowsFormsApp1
             dtotal.Text = (weeklyValues[selectedDay, 2]).ToString();
             ptotal.Text = (weeklyValues[selectedDay, 3]).ToString();
 
-            checkQuantities();
+            checkDailyNutritionQuantities();
         }
 
         private void fridayButton_Click(object sender, EventArgs e)
@@ -309,7 +308,7 @@ namespace WindowsFormsApp1
             dtotal.Text = (weeklyValues[selectedDay, 2]).ToString();
             ptotal.Text = (weeklyValues[selectedDay, 3]).ToString();
 
-            checkQuantities();
+            checkDailyNutritionQuantities();
         }
 
         private void saturdayButton_Click(object sender, EventArgs e)
@@ -329,7 +328,7 @@ namespace WindowsFormsApp1
             dtotal.Text = (weeklyValues[selectedDay, 2]).ToString();
             ptotal.Text = (weeklyValues[selectedDay, 3]).ToString();
 
-            checkQuantities();
+            checkDailyNutritionQuantities();
         }
 
         private void sundayButton_Click(object sender, EventArgs e)
@@ -349,7 +348,7 @@ namespace WindowsFormsApp1
             dtotal.Text = (weeklyValues[selectedDay, 2]).ToString();
             ptotal.Text = (weeklyValues[selectedDay, 3]).ToString();
 
-            checkQuantities();
+            checkDailyNutritionQuantities();
         }
 
         private void resetButtonColors()
@@ -363,8 +362,7 @@ namespace WindowsFormsApp1
             saturdayButton.FlatStyle = FlatStyle.System;
         }
 
-        //CLEAR DAILY INFO
-        private void button10_Click(object sender, EventArgs e)
+        private void clearDailyData(object sender, EventArgs e)
         {
             if(selectedDay > -1)
             {
@@ -374,12 +372,12 @@ namespace WindowsFormsApp1
                 weeklyValues[selectedDay, 3] = 0;
 
                 dailyRecipes[selectedDay].Clear();
+                groceryList[selectedDay].Clear();
                 reset();
             } 
         }
 
-        //CLEAR WEEKLY INFO
-        private void button11_Click(object sender, EventArgs e)
+        private void clearWeeklyData(object sender, EventArgs e)
         {
             if(selectedDay > -1)
             {
@@ -394,8 +392,11 @@ namespace WindowsFormsApp1
                 {
                     selectedDay = i;
                     dailyRecipes[i].Clear();
+                    groceryList[i].Clear();
                     reset();
                 }
+
+                
 
                 
             } 
@@ -416,11 +417,10 @@ namespace WindowsFormsApp1
             dtotal.Text = (weeklyValues[selectedDay, 2]).ToString();
             ptotal.Text = (weeklyValues[selectedDay, 3]).ToString();
 
-            checkQuantities();
+            checkDailyNutritionQuantities();
         }
 
-        //EXPORT INFO
-        private void button3_Click(object sender, EventArgs e)
+        private void exportDataToTextFile(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
             saveFileDialog1.Filter = "Text documents(.txt)| *.txt";
@@ -442,8 +442,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        //IMPORT INFO
-        private void button4_Click(object sender, EventArgs e)
+        private void importDataFromTextFile(object sender, EventArgs e)
         {
             var fileContent = string.Empty;
             var filePath = string.Empty;
@@ -545,8 +544,7 @@ namespace WindowsFormsApp1
             resetButtonColors();           
         }
 
-        //REMOVE RECIPE
-        private void button5_Click(object sender, EventArgs e)
+        private void removeRecipeFromMasterList(object sender, EventArgs e)
         {
             if(recipeList.SelectedItem != null)
             {
@@ -558,19 +556,25 @@ namespace WindowsFormsApp1
                 {
                     recipeList.Items.Add(recipe.Key);
                 }
-                MessageBox.Show(item + "removed from recipe list");
+                MessageBox.Show(item + " removed from recipe list");
             }
         }
 
-        private void recipeList_DoubleClick(object sender, EventArgs e)
+        private void showRecipeIngredients(object sender, EventArgs e)
         {
             if (recipeList.SelectedItem != null)
             {
-                MessageBox.Show(recipeList.SelectedItem.ToString());
+                string result = recipeList.SelectedItem.ToString() + "\n";
+                foreach (var ingredient in ingredientList[recipeList.SelectedItem.ToString()])
+                {
+                    result += ingredient + "\n";
+                }
+    
+                MessageBox.Show(result);
             }
         }
 
-        private void sheetsButton_Click(object sender, EventArgs e)
+        private void sendDataToGoogleSpreadsheets(object sender, EventArgs e)
         {
             UserCredential credential;
 
@@ -584,17 +588,14 @@ namespace WindowsFormsApp1
                     Scopes,
                     "user",
                     CancellationToken.None).Result;
-                //new FileDataStore(credPath, true))
             }
 
-            // Create Google Sheets API service.
             service = new SheetsService(new BaseClientService.Initializer()
             {
                 HttpClientInitializer = credential,
                 ApplicationName = ApplicationName,
             });
 
-            // Define request parameters.
             String spreadsheetId = SheetId;
             String range = "A:A";
 
@@ -605,9 +606,8 @@ namespace WindowsFormsApp1
             IList<IList<Object>> getValues = getResponse.Values;
             List<List<object>> data = new List<List<object>>();
             int currentCount = getValues.Count() + 2;
-
             String newRange = "A" + currentCount + ":A";
-            List<ValueRange> info = new List<ValueRange>();  // TODO: Update placeholder value.
+            List<ValueRange> info = new List<ValueRange>();
             int count = 3;
             char cell = 'A';
    
@@ -615,7 +615,7 @@ namespace WindowsFormsApp1
             {
                 var reciperange = new ValueRange();
                 reciperange.Range = Char.ToString(cell) + count.ToString();
-                reciperange.MajorDimension = "COLUMNS";
+                reciperange.MajorDimension = "COLUMNS"; 
                 List<object> ingreds = new List<object>();
                 foreach (var x in recipe)
                 {
@@ -632,45 +632,64 @@ namespace WindowsFormsApp1
                 cell++;                
             }
 
-            // How the input data should be interpreted.
-            string valueInputOption = "USER_ENTERED";  // TODO: Update placeholder value.
+            string valueInputOption = "USER_ENTERED";
 
-            // The new values to apply to the spreadsheet.
-            
-            // TODO: Assign values to desired properties of `requestBody`:
+            Google.Apis.Sheets.v4.Data.ClearValuesRequest yeah = new ClearValuesRequest();
+            SpreadsheetsResource.ValuesResource.ClearRequest clear = service.Spreadsheets.Values.Clear(yeah, spreadsheetId, "A1:G50");
+            clear.Execute();
             BatchUpdateValuesRequest requestBody = new BatchUpdateValuesRequest();
             requestBody.ValueInputOption = valueInputOption;
             requestBody.Data = info;
-
             SpreadsheetsResource.ValuesResource.BatchUpdateRequest request = service.Spreadsheets.Values.BatchUpdate(requestBody, spreadsheetId);
-
-            // To execute asynchronously in an async method, replace `request.Execute()` as shown:
             BatchUpdateValuesResponse response = request.Execute();
 
+            var headerRange = new ValueRange();
+            List<object> hd = new List<object>();
+            hd.Add("Monday");
+            hd.Add("Tuesday");
+            hd.Add("Wednesday");
+            hd.Add("Thursday");
+            hd.Add("Friday");
+            hd.Add("Saturday");
+            hd.Add("Sunday");
+            headerRange.Range = "A1:G1";
+            headerRange.Values = new List<IList<object>> { hd };
+            List<ValueRange> headerinfo = new List<ValueRange>();
+            headerinfo.Add(headerRange);
+            BatchUpdateValuesRequest requestBody2 = new BatchUpdateValuesRequest();
+            requestBody2.ValueInputOption = valueInputOption;
+            requestBody2.Data = headerinfo;
+            SpreadsheetsResource.ValuesResource.BatchUpdateRequest request2 = service.Spreadsheets.Values.BatchUpdate(requestBody2, spreadsheetId);
+            BatchUpdateValuesResponse response2 = request2.Execute();
+
             MessageBox.Show("Grocery Info Sent to Google Spreadsheet.");
-
-
-
         }
-
-        private void addGroceryToList_Click(object sender, EventArgs e)
-        {
-            
-            Recipe recipe = new Recipe();
-            recipe.Name = nutrientList.SelectedItem.ToString();
-            recipe.Ingredients = ingredientList[nutrientList.SelectedItem.ToString()];
-            IngredientForm ingredientForm = new IngredientForm(recipe);
-
-            if (ingredientForm.ShowDialog() == DialogResult.OK)
+        private void addIngredientsToGroceryList(object sender, EventArgs e)
+        {           
+            if(nutrientList.SelectedItem != null)
             {
-                groceryList[selectedDay].Add(nutrientList.SelectedItem.ToString() + globalCount.ToString()); 
-                ingredientList[nutrientList.SelectedItem.ToString() + globalCount.ToString()] = ingredientForm.ConfirmedIngredients;
-                globalCount++;
-                ingredientForm.Close();
-            }
-        }
-    }
+                Recipe recipe = new Recipe();
+                recipe.Name = nutrientList.SelectedItem.ToString();
+                recipe.Ingredients = ingredientList[nutrientList.SelectedItem.ToString()];
+                IngredientForm ingredientForm = new IngredientForm(recipe);
 
-    
+                if (ingredientForm.ShowDialog() == DialogResult.OK)
+                {
+                    if (ingredientForm.isValid == true)
+                    {
+                        groceryList[selectedDay].Add(nutrientList.SelectedItem.ToString() + globalCount.ToString());
+                        ingredientList[nutrientList.SelectedItem.ToString() + globalCount.ToString()] = ingredientForm.ConfirmedIngredients;
+                        globalCount++;
+                        ingredientForm.Close();
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a recipe from added list.");
+            }
+            
+        }
+    }    
 }
 

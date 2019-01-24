@@ -86,6 +86,7 @@
             this.Controls.Add(this.confirmButton);
             this.Controls.Add(this.ingredientList);
             this.Name = "IngredientForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Select Ingredients";
             this.ResumeLayout(false);
 

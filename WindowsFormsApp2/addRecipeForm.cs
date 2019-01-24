@@ -72,7 +72,8 @@ namespace GroceryApp
                 Veg = vegBox.Text;
                 Dairy = dairyBox.Text;
                 Protein = proteinBox.Text;
-                Ingredients = ingredientsBox.Text.Split();
+                Ingredients = ingredientsBox.Text.Split(',');
+                ingredients = ingredients.Select(x => x.Trim()).ToArray();
                 isValid = true;
                 MessageBox.Show(nameBox.Text + " Recipe Added!");
             }

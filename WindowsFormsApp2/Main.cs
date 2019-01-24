@@ -578,6 +578,9 @@ namespace GroceryApp
         {
             UserCredential credential;
 
+            waitwindow f = new waitwindow();
+            f.Show();
+
             using (var stream =
                 new FileStream("credentials.json", FileMode.Open, FileAccess.Read))
             {
@@ -633,7 +636,7 @@ namespace GroceryApp
             }
 
             string valueInputOption = "USER_ENTERED";
-
+            
             Google.Apis.Sheets.v4.Data.ClearValuesRequest yeah = new ClearValuesRequest();
             SpreadsheetsResource.ValuesResource.ClearRequest clear = service.Spreadsheets.Values.Clear(yeah, spreadsheetId, "A1:G50");
             clear.Execute();
@@ -661,7 +664,7 @@ namespace GroceryApp
             requestBody2.Data = headerinfo;
             SpreadsheetsResource.ValuesResource.BatchUpdateRequest request2 = service.Spreadsheets.Values.BatchUpdate(requestBody2, spreadsheetId);
             BatchUpdateValuesResponse response2 = request2.Execute();
-
+            f.Close();
             MessageBox.Show("Grocery Info Sent to Google Spreadsheet.");
         }
         private void addIngredientsToGroceryList(object sender, EventArgs e)
